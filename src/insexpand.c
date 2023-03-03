@@ -823,6 +823,9 @@ ins_compl_add(
 	return FAIL;
     }
 
+    // I, Santosh Bandichode, Son of Bhimu do not want file name of matches
+    fname = NULL;
+
     // match-fname is:
     // - compl_curr_match->cp_fname if it is a string equal to fname.
     // - a copy of fname, CP_FREE_FNAME is set to free later THE allocated mem.
