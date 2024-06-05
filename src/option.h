@@ -532,10 +532,10 @@ EXTERN int	p_ac;		// 'autocomplete'
 EXTERN long	p_act;		// 'autocompletetimeout'
 EXTERN long	p_acl;		// 'autocompletedelay'
 // Keep in sync with p_cot_values in optionstr.c
-#define COT_MENU	0x001
-#define COT_MENUONE	0x002
-#define COT_ANY_MENU	0x003	// combination of menu flags
-#define COT_LONGEST	0x004	// FALSE: insert full match,
+#define COT_MENU	0x0001
+#define COT_MENUONE	0x0002
+#define COT_ANY_MENU	0x0003	// combination of menu flags
+#define COT_LONGEST	0x0004	// FALSE: insert full match,
 				// TRUE: insert longest prefix
 #define COT_PREVIEW	    0x008
 #define COT_POPUP	    0x010
@@ -548,6 +548,7 @@ EXTERN long	p_acl;		// 'autocompletedelay'
 #define COT_PREINSERT	    0x400   // TRUE: preinsert
 #define COT_NEAREST	    0x800   // TRUE: prioritize matches close to cursor
 #define COT_PATHOPT	    0x1000  // TRUE: consult 'path' for file completion
+#define COT_NOFILE	    0x2000   // TRUE: no file name
 
 #define CFC_KEYWORD         0x001
 #define CFC_FILES           0x002
