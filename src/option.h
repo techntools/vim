@@ -540,6 +540,7 @@ EXTERN int	p_ac;		// 'autocomplete'
 #define COT_NOSORT	    0x200   // TRUE: fuzzy match without qsort score
 #define COT_PREINSERT	    0x400   // TRUE: preinsert
 #define COT_NEAREST	    0x800   // TRUE: prioritize matches close to cursor
+#define COT_NOFILE	    0x800   // TRUE: no file name
 
 #define CFC_KEYWORD         0x001
 #define CFC_FILES           0x002
