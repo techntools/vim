@@ -957,16 +957,18 @@ ins_compl_add(
 
     match->cp_str.length = len;
 
+    int show_fname = fname != NULL && !(get_cot_flags() & COT_NOFILE);
+
     // match-fname is:
     // - compl_curr_match->cp_fname if it is a string equal to fname.
     // - a copy of fname, CP_FREE_FNAME is set to free later THE allocated mem.
     // - NULL otherwise.	--Acevedo
-    if (fname != NULL
+    if (show_fname
 	    && compl_curr_match != NULL
 	    && compl_curr_match->cp_fname != NULL
 	    && STRCMP(fname, compl_curr_match->cp_fname) == 0)
 	match->cp_fname = compl_curr_match->cp_fname;
-    else if (fname != NULL)
+    else if (show_fname)
     {
 	match->cp_fname = vim_strsave(fname);
 	flags |= CP_FREE_FNAME;
