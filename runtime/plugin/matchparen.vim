@@ -110,22 +110,26 @@ func s:Highlight_Matching_Pair()
   if !has("syntax") || !exists("g:syntax_on")
     let s_skip = "0"
   else
-    " Build an expression that detects whether the current cursor position is
-    " in certain syntax types (string, comment, etc.), for use as
-    " searchpairpos()'s skip argument.
-    " We match "escape" for special items, such as lispEscapeSpecial, and
-    " match "symbol" for lispBarSymbol.
-    let s_skip = 'synstack(".", col("."))'
-        \ . '->indexof({_, id -> synIDattr(id, "name") =~? '
-        \ . '"string\\|character\\|singlequote\\|escape\\|symbol\\|comment"}) >= 0'
-    " If executing the expression determines that the cursor is currently in
-    " one of the syntax types, then we want searchpairpos() to find the pair
-    " within those syntax types (i.e., not skip).  Otherwise, the cursor is
-    " outside of the syntax types and s_skip should keep its value so we skip
-    " any matching pair inside the syntax types.
-    " Catch if this throws E363: pattern uses more memory than 'maxmempattern'.
     try
-      execute 'if ' . s_skip . ' | let s_skip = "0" | endif'
+      if exists('b:match_skip_current') && synIDattr(synID(line('.'),col('.'),1),'name') =~? b:match_skip_current
+        let s_skip = '1'
+      else
+	" Build an expression that detects whether the current cursor position is
+	" in certain syntax types (string, comment, etc.), for use as
+	" searchpairpos()'s skip argument.
+	" We match "escape" for special items, such as lispEscapeSpecial, and
+	" match "symbol" for lispBarSymbol.
+	let s_skip = 'synstack(".", col("."))'
+	    \ . '->indexof({_, id -> synIDattr(id, "name") =~? '
+	    \ . '"string\\|character\\|singlequote\\|escape\\|symbol\\|comment"}) >= 0'
+	" If executing the expression determines that the cursor is currently in
+	" one of the syntax types, then we want searchpairpos() to find the pair
+	" within those syntax types (i.e., not skip).  Otherwise, the cursor is
+	" outside of the syntax types and s_skip should keep its value so we skip
+	" any matching pair inside the syntax types.
+	" Catch if this throws E363: pattern uses more memory than 'maxmempattern'.
+        execute 'if ' . s_skip . ' | let s_skip = "0" | endif'
+      endif
     catch /^Vim\%((\a\+)\)\=:E363/
       " We won't find anything, so skip searching, should keep Vim responsive.
       return
@@ -190,7 +194,7 @@ func s:Highlight_Matching_Pair()
   endif
 
   " If a match is found setup match highlighting.
-  if m_lnum > 0 && m_lnum >= stoplinetop && m_lnum <= stoplinebottom 
+  if m_lnum > 0 && m_lnum >= stoplinetop && m_lnum <= stoplinebottom
     if s:has_matchaddpos
       if !g:matchparen_disable_cursor_hl
         call add(w:matchparen_ids, matchaddpos('MatchParen', [[c_lnum, c_col - before], [m_lnum, m_col]], 10))
