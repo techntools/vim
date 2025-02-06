@@ -128,7 +128,15 @@ func s:Highlight_Matching_Pair()
     " any matching pair inside the syntax types.
     " Catch if this throws E363: pattern uses more memory than 'maxmempattern'.
     try
-      execute 'if ' . s_skip . ' | let s_skip = "0" | endif'
+      if exists('b:match_skip_syntax')
+        if synIDattr(synID(line('.'), col('.'), 1), 'name') =~? b:match_skip_syntax
+          let s_skip = "1"
+        else
+          let s_skip = "synIDattr(synID(line('.'), col('.'), 1), 'name') =~? b:match_skip_syntax"
+        endif
+      else
+        execute 'if ' . s_skip . ' | let s_skip = "0" | endif'
+      endif
     catch /^Vim\%((\a\+)\)\=:E363/
       " We won't find anything, so skip searching, should keep Vim responsive.
       return
