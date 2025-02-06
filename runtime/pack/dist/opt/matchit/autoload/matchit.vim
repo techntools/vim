@@ -243,7 +243,15 @@ function matchit#Match_wrapper(word, forward, mode) range
   if skip =~ 'synID' && !(has("syntax") && exists("g:syntax_on"))
     let skip = "0"
   else
-    execute "if " .. skip .. "| let skip = '0' | endif"
+    if exists('b:match_skip_syntax')
+      if synIDattr(synID(line('.'), col('.'), 1), 'name') =~? b:match_skip_syntax
+        let skip = "1"
+      else
+        let skip = "synIDattr(synID(line('.'), col('.'), 1), 'name') =~? b:match_skip_syntax"
+      endif
+    else
+      execute "if " .. skip .. "| let skip = '0' | endif"
+    endif
   endif
   let sp_return = searchpair(ini, mid, fin, flag, skip)
   if &selection isnot# 'inclusive' && a:mode == 'v'
