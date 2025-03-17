@@ -4355,13 +4355,13 @@ typedef struct
 // bonus if match occurs after a word separator
 #define WORD_SEPARATOR_BONUS 25
 // bonus if match is uppercase and prev is lower
-#define CAMEL_BONUS 30
+#define CAMEL_BONUS 15
 // bonus if the first letter is matched
-#define FIRST_LETTER_BONUS 15
+#define FIRST_LETTER_BONUS 25
 // bonus if exact match
 #define EXACT_MATCH_BONUS 100
 // bonus if case match when no ignorecase
-#define CASE_MATCH_BONUS 25
+#define CASE_MATCH_BONUS 30
 // penalty applied for every letter in str before the first match
 #define LEADING_LETTER_PENALTY (-5)
 // maximum penalty for leading letters
