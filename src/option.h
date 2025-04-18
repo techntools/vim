@@ -529,22 +529,22 @@ EXTERN int	p_ac;		// 'autocomplete'
 EXTERN long	p_act;		// 'autocompletetimeout'
 EXTERN long	p_acl;		// 'autocompletedelay'
 // Keep in sync with p_cot_values in optionstr.c
-#define COT_MENU	0x001
-#define COT_MENUONE	0x002
-#define COT_ANY_MENU	0x003	// combination of menu flags
-#define COT_LONGEST	0x004	// FALSE: insert full match,
+#define COT_MENU	0x0001
+#define COT_MENUONE	0x0002
+#define COT_ANY_MENU	0x0003	// combination of menu flags
+#define COT_LONGEST	0x0004	// FALSE: insert full match,
 				// TRUE: insert longest prefix
-#define COT_PREVIEW	    0x008
-#define COT_POPUP	    0x010
-#define COT_POPUPHIDDEN	    0x020
-#define COT_ANY_PREVIEW	    0x038   // combination of preview flags
-#define COT_NOINSERT	    0x040   // FALSE: select & insert, TRUE: noinsert
-#define COT_NOSELECT	    0x080   // FALSE: select & insert, TRUE: noselect
-#define COT_FUZZY	    0x100   // TRUE: fuzzy match enabled
-#define COT_NOSORT	    0x200   // TRUE: fuzzy match without qsort score
-#define COT_PREINSERT	    0x400   // TRUE: preinsert
-#define COT_NEAREST	    0x800   // TRUE: prioritize matches close to cursor
-#define COT_NOFILE	    0x800   // TRUE: no file name
+#define COT_PREVIEW	    0x0008
+#define COT_POPUP	    0x0010
+#define COT_POPUPHIDDEN	    0x0020
+#define COT_ANY_PREVIEW	    0x0038   // combination of preview flags
+#define COT_NOINSERT	    0x0040   // FALSE: select & insert, TRUE: noinsert
+#define COT_NOSELECT	    0x0080   // FALSE: select & insert, TRUE: noselect
+#define COT_FUZZY	    0x0100   // TRUE: fuzzy match enabled
+#define COT_NOSORT	    0x0200   // TRUE: fuzzy match without qsort score
+#define COT_PREINSERT	    0x0400   // TRUE: preinsert
+#define COT_NEAREST	    0x0800   // TRUE: prioritize matches close to cursor
+#define COT_NOFILE	    0x1000   // TRUE: no file name
 
 #define CFC_KEYWORD         0x001
 #define CFC_FILES           0x002
